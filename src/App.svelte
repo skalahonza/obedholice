@@ -1,10 +1,9 @@
-<script>
-	export let name;
+<script>	
 </script>
 
 <main>
 	<h1>Obědy Holice</h1>
-	<p>Agregátor restauračních menu ve městě Holice.</p>
+	<h2>Agregátor restauračních menu ve městě Holice.</h2>
 </main>
 
 <style>
