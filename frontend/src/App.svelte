@@ -17,8 +17,8 @@
 
 	export let restaurants = [];
 
-	onMount(() => {
-		restaurants = getRestaurants();
+	onMount(async() => {
+		restaurants = await getRestaurants();
 		console.log(restaurants);
 	});
 </script>
