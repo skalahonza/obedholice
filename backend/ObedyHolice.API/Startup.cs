@@ -13,6 +13,7 @@ namespace ObedyHolice.API
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddSingleton<IRestaurant, DummyRestaurant>();
+            builder.Services.AddSingleton<IRestaurant, CoronaHolice>();
         }
     }
 }

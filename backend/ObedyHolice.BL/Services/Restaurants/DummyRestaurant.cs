@@ -2,13 +2,13 @@
 
 namespace ObedyHolice.BL.Services.Restaurants
 {
-    public class DummyRestaurant : IRestaurant
+    public class DummyRestaurant : RestaurantBase
     {
-        public string Name => "Dummy";
+        public override string Name => "Dummy";
 
-        public string SubTitle => "Only for reference implementation";
+        public override string SubTitle => "Only for reference implementation";
 
-        public Task<List<string>> GetMenuItems() =>
+        public override Task<List<string>> GetMenuItems() =>
             Task.FromResult(new List<string>
             {
              "Polévka",
