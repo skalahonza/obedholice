@@ -11,7 +11,16 @@
 		CardTitle,
 	} from "sveltestrap";
 
-	let cards = [1, 2, 3, 4, 5];
+	import { onMount } from "svelte";
+
+	import { getRestaurants } from "./api/restaurants";
+
+	export let restaurants = [];
+
+	onMount(() => {
+		restaurants = getRestaurants();
+		console.log(restaurants);
+	});
 </script>
 
 <main>
@@ -22,17 +31,19 @@
 		</Row>
 		<Row>
 			<CardDeck class="mt-4">
-				{#each Array(5) as _, i}
+				{#each restaurants as restaurant}
 					<Card class="mb-3">
 						<CardHeader>
-							<CardTitle>Resturace {i + 1}</CardTitle>
+							<CardTitle>{restaurant.name}</CardTitle>
 						</CardHeader>
 						<CardBody>
-							<CardSubtitle>Polední menu</CardSubtitle>
+							<CardSubtitle>{restaurant.subTitle}</CardSubtitle>
 							<CardText>
-								Some quick example text to build on the card
-								title and make up the bulk of the card's
-								content.
+								<ul>
+									{#each restaurant.menuItems as item}
+										<li>{item}</li>
+									{/each}
+								</ul>
 							</CardText>
 						</CardBody>
 					</Card>
