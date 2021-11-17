@@ -35,9 +35,7 @@ namespace ObedyHolice.BL.Services.Restaurants
 
         private List<string> ParseTodayMenu(IEnumerable<string> menuRows)
         {
-            var today = DateTime.Now.DayOfWeek;
             var dayilyMenus = new Dictionary<DayOfWeek, List<string>>();
-
             DayOfWeek? day = null;
 
             var enumerator = menuRows.GetEnumerator();
@@ -63,14 +61,7 @@ namespace ObedyHolice.BL.Services.Restaurants
                 }
             }
 
-            if (dayilyMenus.TryGetValue(today, out var menu))
-            {
-                return menu;
-            }
-            else
-            {
-                return new List<string>();
-            }
+            return MenuForToday(dayilyMenus);
         }
     }
 }

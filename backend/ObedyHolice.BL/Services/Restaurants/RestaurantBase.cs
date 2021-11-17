@@ -21,5 +21,18 @@ namespace ObedyHolice.BL.Services.Restaurants
         public abstract string SubTitle { get; }
 
         public abstract Task<List<string>> GetMenuItems();
+
+        protected static List<string> MenuForToday(Dictionary<DayOfWeek, List<string>> dayilyMenus)
+        {
+            var today = DateTime.Now.DayOfWeek;
+            if (dayilyMenus.TryGetValue(today, out var menu))
+            {
+                return menu;
+            }
+            else
+            {
+                return new List<string>();
+            }
+        }
     }
 }

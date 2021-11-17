@@ -14,6 +14,7 @@ namespace ObedyHolice.API
         {
             builder.Services.AddSingleton<IRestaurant, DummyRestaurant>();
             builder.Services.AddSingleton<IRestaurant, CoronaHolice>();
+            builder.Services.AddSingleton<IRestaurant, QuickPoint>();
         }
     }
 }
