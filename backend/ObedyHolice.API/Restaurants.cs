@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos.Table;
+using Microsoft.Azure.Cosmos.Table.Queryable;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
@@ -45,29 +46,13 @@ namespace ObedyHolice.API
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<Restaurant>), Description = "List of restaurants.")]
         public async Task<List<Restaurant>> ListRestaurants(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "restaurants")] HttpRequest req,
-            IBinder binder,
+            [Table("Restaurants")] CloudTable table,
             ILogger log)
         {
             var today = DateTime.Now.ToString("yyyy-MM-dd");
-            var table = await binder.BindAsync<CloudTable>(new TableAttribute("Restaurants", today));
-            var data = await table.ExecuteQuerySegmentedAsync(new TableQuery<RestaurantEntity>(), default);
+            var query = table.CreateQuery<RestaurantEntity>().Where(x => x.PartitionKey == today).AsTableQuery();
+            var data = await table.ExecuteQuerySegmentedAsync(query, default);
             return data.Select(x => x.ToRecord()).ToList();
-
-            return Enumerable
-                .Range(1, 5)
-                .Select(i => new Restaurant
-                (
-                    $"Restaurant {i} from backend",
-                    "Polední menu",
-                    new List<string>
-                    {
-                     "Polévka",
-                    "Hlavní jídlo 1",
-                    "Hlavní jídlo 2",
-                    "Hlavní jídlo 3"
-                    }
-                ))
-                .ToList();
         }
 
         /// <summary>
