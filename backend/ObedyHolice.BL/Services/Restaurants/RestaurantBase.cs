@@ -20,6 +20,8 @@ namespace ObedyHolice.BL.Services.Restaurants
 
         public abstract string SubTitle { get; }
 
+        public abstract string Website { get; }
+
         public abstract Task<List<string>> GetMenuItems();
 
         protected static List<string> MenuForToday(Dictionary<DayOfWeek, List<string>> dayilyMenus)

@@ -17,7 +17,7 @@
 
 	export let restaurants = [];
 
-	onMount(async() => {
+	onMount(async () => {
 		restaurants = await getRestaurants();
 		console.log(restaurants);
 	});
@@ -45,6 +45,7 @@
 									{/each}
 								</ul>
 							</CardText>
+							<a class="btn btn-light" href="{restaurant.website}" role="button" target="_blank">Menu</a>
 						</CardBody>
 					</Card>
 				{/each}

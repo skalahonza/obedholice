@@ -22,6 +22,7 @@ namespace ObedyHolice.API
         (
             string Name,
             string SubTitle,
+            string Website,
             List<string> MenuItems
         );
 
@@ -81,7 +82,7 @@ namespace ObedyHolice.API
 
                     log.LogInformation($"Persisting {restaurant.Name} menu.");
 
-                    var oepration = TableOperation.InsertOrReplace(new RestaurantEntity(restaurant.Name, restaurant.SubTitle, menu));
+                    var oepration = TableOperation.InsertOrReplace(new RestaurantEntity(restaurant.Name, restaurant.SubTitle, restaurant.Website, menu));
                     await table.ExecuteAsync(oepration);
 
                     log.LogInformation($"Persisted {restaurant.Name} menu.");

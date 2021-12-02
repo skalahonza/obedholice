@@ -1,12 +1,12 @@
-﻿using ObedyHolice.BL.Interfaces;
-
-namespace ObedyHolice.BL.Services.Restaurants
+﻿namespace ObedyHolice.BL.Services.Restaurants
 {
     public class DummyRestaurant : RestaurantBase
     {
         public override string Name => "Dummy";
 
         public override string SubTitle => "Only for reference implementation";
+
+        public override string Website => "https://localhost";
 
         public override Task<List<string>> GetMenuItems() =>
             Task.FromResult(new List<string>

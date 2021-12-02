@@ -10,10 +10,12 @@ namespace ObedyHolice.BL.Services.Restaurants
 
         public override string SubTitle => "Mexická kuchyně";
 
+        public override string Website => "https://icorona37.wixsite.com/site01/tdenni";
+
         public override async Task<List<string>> GetMenuItems()
         {
             var web = new HtmlWeb();
-            var doc = await web.LoadFromWebAsync("https://icorona37.wixsite.com/site01/tdenni");
+            var doc = await web.LoadFromWebAsync(Website);
 
             var menu = doc.DocumentNode
                 .SelectNodes("//div")

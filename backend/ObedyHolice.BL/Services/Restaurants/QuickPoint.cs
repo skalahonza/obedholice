@@ -10,16 +10,17 @@ namespace ObedyHolice.BL.Services.Restaurants
 {
     public class QuickPoint : RestaurantBase
     {
-        private const string WEBSITE = "https://hoteljunker.cz/restaurant";
 
         public override string Name => "Quickpoint Restaurant";
 
         public override string SubTitle => "Nachází se v 1. patře Hotelu Erwin Junker";
 
+        public override string Website => "https://hoteljunker.cz/restaurant";
+
         public override async Task<List<string>> GetMenuItems()
         {
             var web = new HtmlWeb();
-            var doc = await web.LoadFromWebAsync(WEBSITE);
+            var doc = await web.LoadFromWebAsync(Website);
 
             var pdfLink = doc.DocumentNode
                 .SelectNodes("//a")
@@ -35,7 +36,7 @@ namespace ObedyHolice.BL.Services.Restaurants
                 return new List<string>();
             }
 
-            var uri = new UriBuilder(WEBSITE)
+            var uri = new UriBuilder(Website)
             {
                 Path = pdfLink
             }.Uri;

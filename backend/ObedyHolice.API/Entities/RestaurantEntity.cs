@@ -15,10 +15,11 @@ namespace ObedyHolice.API.Entities
         {
         }
 
-        public RestaurantEntity(string name, string subTitle, IEnumerable<string> menuItems)
+        public RestaurantEntity(string name, string subTitle, string website, IEnumerable<string> menuItems)
         {
             Name = name;
             SubTitle = subTitle;
+            Website = website;
             MenuCsv = string.Join(SEPARATOR, menuItems);
             RowKey = Name;
             PartitionKey = DateTime.Now.ToString("yyyy-MM-dd");
@@ -28,9 +29,11 @@ namespace ObedyHolice.API.Entities
 
         public string SubTitle { get; set; }
 
+        public string Website { get; set; }
+
         public string MenuCsv { get; set; }
 
         public Restaurant ToRecord() =>
-            new(Name, SubTitle, MenuCsv.Split(SEPARATOR).ToList());
+            new(Name, SubTitle, Website, MenuCsv.Split(SEPARATOR).ToList());
     }
 }

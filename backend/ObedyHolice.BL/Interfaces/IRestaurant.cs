@@ -13,6 +13,11 @@
         string SubTitle { get; }
 
         /// <summary>
+        /// The restaurant's menu website.
+        /// </summary>
+        string Website { get; }
+
+        /// <summary>
         /// Fetches menu items for current day.
         /// </summary>
         /// <returns></returns>
