@@ -27,7 +27,7 @@
 	<Container>
 		<Row>
 			<h1>Obědy Holice</h1>
-			<h2>Agregátor restauračních menu ve městě Holice.</h2>
+			<h2>Agregátor restauračních menu ve městě Holice</h2>
 		</Row>
 		<Row>
 			<CardDeck class="mt-4">

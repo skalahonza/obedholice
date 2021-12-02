@@ -10,6 +10,7 @@ namespace ObedyHolice.BL.Services.Restaurants
 {
     public class QuickPoint : RestaurantBase
     {
+        private const string MENU_ITEM_TERMINATOR = ",-";
 
         public override string Name => "Quickpoint Restaurant";
 
@@ -60,16 +61,16 @@ namespace ObedyHolice.BL.Services.Restaurants
         /// </summary>
         private void TrySaveDay(DayOfWeek? day, StringBuilder menuLine, Dictionary<DayOfWeek, List<string>> dayilyMenus)
         {
-            if (day.HasValue)
+            var line = menuLine.ToString();
+            if (day.HasValue && line.Contains(MENU_ITEM_TERMINATOR))
             {
-                dayilyMenus[day.Value].Add(menuLine.ToString());
-                menuLine.Clear(); 
+                dayilyMenus[day.Value].Add(line);
+                menuLine.Clear();
             }
         }
 
         private List<string> ParseMenu(IEnumerable<Word> words)
         {
-            const string MENU_ITEM_TERMINATOR = ",-";
             var today = DateTime.Now.DayOfWeek;
             var dayilyMenus = new Dictionary<DayOfWeek, List<string>>();
 
@@ -105,7 +106,7 @@ namespace ObedyHolice.BL.Services.Restaurants
                 }
 
                 // stop word
-                else if(word.Equals("speciality", StringComparison.OrdinalIgnoreCase))
+                else if (word.Equals("speciality", StringComparison.OrdinalIgnoreCase))
                 {
                     break;
                 }
