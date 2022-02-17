@@ -11,16 +11,9 @@
 		CardTitle,
 	} from "sveltestrap";
 
-	import { onMount } from "svelte";
+	import * as data from './data/restaurants.json'
 
-	import { getRestaurants } from "./api/restaurants";
-
-	export let restaurants = [];
-
-	onMount(async () => {
-		restaurants = await getRestaurants();
-		console.log(restaurants);
-	});
+	export let restaurants = data.default;
 </script>
 
 <main>
@@ -39,11 +32,7 @@
 						<CardBody>
 							<CardSubtitle>{restaurant.subTitle}</CardSubtitle>
 							<CardText>
-								<ul>
-									{#each restaurant.menuItems as item}
-										<li>{item}</li>
-									{/each}
-								</ul>
+								<iframe src="{restaurant.website}" title="{restaurant.name}" frameborder="0" height="800"></iframe>
 							</CardText>
 							<a class="btn btn-light" href="{restaurant.website}" role="button" target="_blank">Menu</a>
 						</CardBody>
@@ -72,6 +61,7 @@
 	h2 {
 		text-align: center;
 	}
+	iframe { display: block; width:100%; }
 	/*
 	@media (min-width: 640px) {
 		main {
