@@ -9,9 +9,11 @@
 		CardSubtitle,
 		CardText,
 		CardTitle,
+		TabContent,
+		TabPane,
 	} from "sveltestrap";
 
-	import * as data from './data/restaurants.json'
+	import * as data from "./data/restaurants.json";
 
 	export let restaurants = data.default;
 </script>
@@ -23,22 +25,18 @@
 			<h2>Agregátor restauračních menu ve městě Holice</h2>
 		</Row>
 		<Row>
-			<CardDeck class="mt-4">
-				{#each restaurants as restaurant}
-					<Card class="mb-3">
-						<CardHeader>
-							<CardTitle>{restaurant.name}</CardTitle>
-						</CardHeader>
-						<CardBody>
-							<CardSubtitle>{restaurant.subTitle}</CardSubtitle>
-							<CardText>
-								<iframe src="{restaurant.website}" title="{restaurant.name}" frameborder="0" height="800"></iframe>
-							</CardText>
-							<a class="btn btn-light" href="{restaurant.website}" role="button" target="_blank">Menu</a>
-						</CardBody>
-					</Card>
+			<TabContent>
+				{#each restaurants as restaurant, i}
+					<TabPane tabId={restaurant.name} tab={restaurant.name} active="{i == 0}">
+						<iframe
+							src={restaurant.website}
+							title={restaurant.name}
+							frameborder="0"
+							height="800"
+						/>
+					</TabPane>
 				{/each}
-			</CardDeck>
+			</TabContent>
 		</Row>
 	</Container>
 </main>
@@ -61,7 +59,10 @@
 	h2 {
 		text-align: center;
 	}
-	iframe { display: block; width:100%; }
+	iframe {
+		display: block;
+		width: 100%;
+	}
 	/*
 	@media (min-width: 640px) {
 		main {
