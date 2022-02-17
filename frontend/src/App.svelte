@@ -2,13 +2,6 @@
 	import {
 		Container,
 		Row,
-		Card,
-		CardDeck,
-		CardBody,
-		CardHeader,
-		CardSubtitle,
-		CardText,
-		CardTitle,
 		TabContent,
 		TabPane,
 	} from "sveltestrap";
